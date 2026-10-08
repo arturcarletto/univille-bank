@@ -1,0 +1,51 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /workspace/backend
+    init: true
+    volumes:
+      - .:/workspace
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: local
+      APP_URL: http://localhost:8000
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /workspace/backend/database/database.sqlite
+      QUEUE_CONNECTION: database
+    command:
+      - sh
+      - -lc
+      - |
+        if [ ! -f artisan ]; then
+          echo "backend/ ainda não foi criado. Execute primeiro o comando de bootstrap documentado." >&2
+          exit 1
+        fi
+        touch database/database.sqlite
+        exec php artisan serve --host=0.0.0.0 --port=8000
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /workspace/backend
+    init: true
+    volumes:
+      - .:/workspace
+    environment:
+      APP_ENV: local
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /workspace/backend/database/database.sqlite
+      QUEUE_CONNECTION: database
+    command:
+      - sh
+      - -lc
+      - |
+        if [ ! -f artisan ]; then
+          echo "backend/ ainda não foi criado. Execute primeiro o comando de bootstrap documentado." >&2
+          exit 1
+        fi
+        touch database/database.sqlite
+        exec php artisan queue:work database --sleep=1 --tries=3 --timeout=90

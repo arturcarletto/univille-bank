@@ -1,0 +1,20 @@
+[
+    {
+        "external_id": "TX-1001",
+        "amount": "1250.50",
+        "currency": "BRL",
+        "occurred_at": "2026-10-08T09:00:00-03:00"
+    },
+    {
+        "external_id": "TX-1002",
+        "amount": "49.90",
+        "currency": "BRL",
+        "occurred_at": "2026-10-08T10:15:00-03:00"
+    },
+    {
+        "external_id": "TX-1003",
+        "amount": "800.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-08T11:30:00-03:00"
+    }
+]

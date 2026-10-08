@@ -1,0 +1,90 @@
+# Environment and local secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+auth.json
+credentials.json
+service-account*.json
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Dependencies
+vendor/
+node_modules/
+
+# Local databases and SQLite sidecar files
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite3-journal
+*.sqlite3-shm
+*.sqlite3-wal
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Logs and temporary files
+*.log
+*.log.*
+*.tmp
+*.swp
+*.swo
+*~
+
+# Tests, coverage, and generated tooling
+.phpunit.cache/
+.phpunit.result.cache
+coverage/
+_ide_helper*.php
+.phpactor.json
+
+# Frontend builds and caches
+dist/
+.vite/
+.cache/
+*.tsbuildinfo
+.eslintcache
+.stylelintcache
+
+# Docker local overrides
+compose.override.yaml
+compose.override.yml
+docker-compose.override.yaml
+docker-compose.override.yml
+
+# Editors and local AI tooling
+.codex/
+.agents/
+.claude/
+.cursor/
+.idea/
+.nova/
+.vscode/
+.zed/
+AGENTS.md
+CLAUDE.md
+
+# Internal planning and normative source images kept only in the workspace
+docs/ARCHITECTURE.md
+docs/DECISIONS.md
+docs/IMPLEMENTATION_PLAN.md
+docs/REQUIREMENTS.md
+docs/specs/
+docs/reference/*.jpg
+docs/reference/*.jpeg
+docs/reference/*.png
+
+# Operating systems
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Legacy Laravel development environments
+Homestead.json
+Homestead.yaml
