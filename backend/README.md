@@ -1,92 +1,41 @@
-# Univille Bank — Backend
+# Univille Bank — Referência da API
 
-API Univille Bank implementada com Laravel 13, PHP 8.3, SQLite, Laravel Sanctum e fila `database`.
+A instalação, execução e demonstração estão no [README principal](../README.md).
+Esta referência descreve os contratos específicos do backend Laravel/Sanctum.
 
-O [README da raiz](../README.md) contém o procedimento principal de instalação,
-frontend e demonstração. Execute os comandos abaixo na raiz do repositório.
+## Autenticação e respostas
 
-## Inicialização com Docker
-
-Execute na raiz do repositório, em PowerShell:
-
-```powershell
-$createdBackendEnv = $false
-if (-not (Test-Path -LiteralPath 'backend\.env')) {
-    Copy-Item -LiteralPath 'backend\.env.example' -Destination 'backend\.env'
-    $createdBackendEnv = $true
-}
-if (-not (Test-Path -LiteralPath 'backend\database\database.sqlite')) {
-    New-Item -ItemType File -Path 'backend\database\database.sqlite' | Out-Null
-}
-docker compose build app worker
-docker compose run --rm --no-deps app composer install --no-interaction --prefer-dist
-if ($createdBackendEnv) {
-    docker compose run --rm --no-deps app php artisan key:generate
-}
-docker compose run --rm --no-deps app php artisan migrate --force
-docker compose up -d app
-```
-
-A API fica disponível em `http://localhost:8000`. O arquivo `.env` e o banco SQLite local são ignorados pelo Git.
-Uma chave válida e um banco existente devem ser preservados. Não utilizar
-`composer update` para reproduzir o lockfile, nem `composer setup` como substituto:
-esse script também gera chave e instala/compila os assets herdados do backend.
-
-O Compose mantém `DB_CONNECTION=sqlite`, `QUEUE_CONNECTION=database` e o mesmo
-SQLite para API e worker. Deixe `DB_QUEUE_CONNECTION` ausente ou igual a `sqlite`;
-a atomicidade do enqueue depende da mesma conexão Laravel.
-
-## Ingestão simulada
-
-O comando recebe somente caminhos relativos a `database/fixtures`. Cada item é persistido de modo idempotente e enviado para um Job independente.
-
-```powershell
-docker compose run --rm --no-deps app php artisan transactions:ingest
-docker compose run --rm --no-deps app php artisan transactions:ingest transactions-with-invalid.json
-```
-
-Para consumo contínuo, execute `docker compose up -d worker` depois das migrations.
-Para observar os estados intermediários, mantenha esse serviço parado e siga a
-demonstração do README raiz. O exemplo é `backend/database/fixtures/transactions.json`.
-Para processar a fila manualmente, sem outro worker ativo:
-
-```powershell
-docker compose run --rm --no-deps app php artisan queue:work database --stop-when-empty --tries=3
-```
-
-## Contrato REST
-
-Todas as respostas de validação usam HTTP 422. Credenciais inválidas e chamadas protegidas sem token usam HTTP 401.
-
-| Método | Endpoint | Autenticação | Contrato |
+| Método | Endpoint | Entrada/retorno | Autenticação |
 |---|---|---|---|
-| `POST` | `/api/register` | Pública | `name`, `email`, `password`, `password_confirmation`; retorna `token` e `user` (201) |
-| `POST` | `/api/login` | Pública | `email`, `password`; retorna `token` e `user` (200) |
-| `POST` | `/api/logout` | Bearer token | Revoga o token atual (204) |
-| `GET` | `/api/transactions` | Bearer token | Lista paginada, ordenada por recebimento mais recente |
-| `GET` | `/api/dashboard/summary` | Bearer token | Retorna contagens `pending` e `processed` |
+| POST | /api/register | name, email, password, password_confirmation; retorna token e user (201) | Pública |
+| POST | /api/login | email, password; retorna token e user (200) | Pública |
+| POST | /api/logout | Revoga o token atual (204) | Bearer |
+| GET | /api/transactions | data, links e meta de paginação | Bearer |
+| GET | /api/dashboard/summary | Contagens globais pending e processed | Bearer |
 
-Filtros de `/api/transactions`:
+Enviar o token em `Authorization: Bearer <token>`. A API retorna JSON, inclusive
+sem `Accept: application/json`. Validação usa HTTP 422; credenciais inválidas ou
+token ausente/inválido usam HTTP 401. Cadastro/login têm limite de 10 tentativas
+por minuto.
 
-- `status`: `pending`, `processed`, `invalid` ou `failed`;
-- `from` e `to`: datas inclusivas em `YYYY-MM-DD`, aplicadas a `received_at` em UTC;
-- `min_amount` e `max_amount`: strings decimais positivas com até duas casas;
-- `page`: inteiro positivo;
-- `per_page`: de 1 a 100, padrão 15.
+## Consulta de transações
 
-Valores monetários são recebidos e devolvidos como strings decimais e armazenados em centavos inteiros. O payload bruto e motivos internos de falha não são expostos pela API.
+- status: pending, processed, invalid ou failed; omitido, consulta todos.
+- from e to: datas inclusivas YYYY-MM-DD, aplicadas a received_at em UTC.
+- min_amount e max_amount: strings decimais positivas com até duas casas.
+- page: inteiro positivo; per_page: 1 a 100, padrão 15.
+- Ordenação: received_at e id decrescentes.
 
-## Verificação
+Cada registro expõe id, external_id, status, amount, currency, occurred_at,
+received_at e processed_at. amount é uma string decimal exata ou null;
+centavos são persistidos como inteiros. Payload bruto e motivos internos de
+falha não são expostos. Os indicadores são globais, independentes dos filtros.
 
-```powershell
-docker compose run --rm --no-deps app php -m
-docker compose run --rm --no-deps app composer validate --strict
-docker compose run --rm --no-deps app php artisan route:list --path=api
-docker compose run --rm --no-deps app php artisan test --env=testing --do-not-cache-result
-docker compose run --rm --no-deps app php vendor/bin/pint --test
-```
+## Fila e persistência
 
-Os testes usam SQLite em memória e `SESSION_DRIVER=array`, sem alterar sessões
-da aplicação. A fila é sync por padrão; AtomicTransactionDispatchTest usa database
-na mesma conexão isolada e verifica rollback, idempotência, recuperação e falha
-definitiva pelo worker. Não executar migrations destrutivas em bancos existentes.
+SQLite e a fila database usam a mesma conexão Laravel: DB_QUEUE_CONNECTION
+fica ausente ou igual a sqlite para preservar a atomicidade de registro e enqueue.
+A fonte simulada aceita caminhos relativos a backend/database/fixtures.
+Cada transação possui um Job independente; dados inválidos recebem status invalid,
+enquanto falhas de processamento esgotadas recebem failed e registro em failed_jobs.
+Os Jobs têm até três tentativas, com backoff de 5 e 30 segundos entre elas.

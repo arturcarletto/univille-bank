@@ -106,11 +106,16 @@ O Vite encaminha `/api` ao Laravel pelo proxy definido no frontend.
    docker compose run --rm --no-deps app php artisan transactions:ingest transactions.json
    ```
 
-3. Aguarde o worker processar os Jobs e clique em **Atualizar dados** no dashboard.
+3. Aguarde o worker processar os Jobs: o dashboard atualiza indicadores e tabela automaticamente.
 
 A fonte `backend/database/fixtures/transactions.json` contém **3 transações válidas**. Em um banco novo, o resultado esperado é **3 processadas e 0 pendentes**.
 
 A interface disponibiliza **filtros por status, período e valores**, **paginação** e **indicadores globais** de transações pendentes e processadas.
+
+O **Short Polling** consulta a API na abertura e agenda cada atualização 5 segundos
+após a conclusão da anterior. Pausa com a aba oculta e retoma ao voltar, mantendo
+filtros aplicados, página e campos em edição. O botão **Atualizar dados** continua
+disponível; falhas transitórias preservam os últimos dados e permitem nova tentativa.
 
 <details>
 <summary><strong>Ver a transição de pendente para processada</strong></summary>
@@ -123,13 +128,15 @@ docker compose run --rm --no-deps app php artisan transactions:ingest transactio
 docker compose run --rm --no-deps app php artisan queue:work database --once --sleep=1 --tries=3 --timeout=90
 ```
 
-O primeiro Job lê a fonte e cria **3 transações pendentes**. Atualize o dashboard e filtre por `pending`. Para processá-las, reinicie o worker:
+O primeiro Job lê a fonte e cria **3 transações pendentes**. Filtre por `pending`;
+o polling exibirá esses registros. Para processá-las, reinicie o worker:
 
 ```bash
 docker compose up -d worker
 ```
 
-Atualize o dashboard novamente para observar as **3 transações processadas**.
+Observe o indicador chegar a **3 processadas** automaticamente. Para listar esses
+registros, mude o filtro de status para `processed`.
 
 </details>
 
