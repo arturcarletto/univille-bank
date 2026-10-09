@@ -1,0 +1,302 @@
+[
+    {
+        "external_id": "TX-DEMO-001",
+        "amount": "6.50",
+        "currency": "BRL",
+        "occurred_at": "2026-10-01T08:00:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-002",
+        "amount": "12.90",
+        "currency": "BRL",
+        "occurred_at": "2026-10-01T09:07:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-003",
+        "amount": "18.75",
+        "currency": "BRL",
+        "occurred_at": "2026-10-01T10:14:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-004",
+        "amount": "24.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-01T11:21:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-005",
+        "amount": "32.40",
+        "currency": "BRL",
+        "occurred_at": "2026-10-01T12:28:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-006",
+        "amount": "45.90",
+        "currency": "BRL",
+        "occurred_at": "2026-10-01T13:35:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-007",
+        "amount": "59.99",
+        "currency": "BRL",
+        "occurred_at": "2026-10-01T14:42:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-008",
+        "amount": "74.80",
+        "currency": "BRL",
+        "occurred_at": "2026-10-01T15:49:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-009",
+        "amount": "89.50",
+        "currency": "BRL",
+        "occurred_at": "2026-10-01T16:56:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-010",
+        "amount": "105.25",
+        "currency": "BRL",
+        "occurred_at": "2026-10-01T17:03:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-011",
+        "amount": "129.90",
+        "currency": "BRL",
+        "occurred_at": "2026-10-02T08:10:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-012",
+        "amount": "158.60",
+        "currency": "BRL",
+        "occurred_at": "2026-10-02T09:17:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-013",
+        "amount": "179.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-02T10:24:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-014",
+        "amount": "215.45",
+        "currency": "BRL",
+        "occurred_at": "2026-10-02T11:31:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-015",
+        "amount": "249.99",
+        "currency": "BRL",
+        "occurred_at": "2026-10-02T12:38:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-016",
+        "amount": "289.70",
+        "currency": "BRL",
+        "occurred_at": "2026-10-02T13:45:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-017",
+        "amount": "325.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-02T14:52:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-018",
+        "amount": "378.80",
+        "currency": "BRL",
+        "occurred_at": "2026-10-02T15:59:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-019",
+        "amount": "420.35",
+        "currency": "BRL",
+        "occurred_at": "2026-10-02T16:06:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-020",
+        "amount": "499.90",
+        "currency": "BRL",
+        "occurred_at": "2026-10-02T17:13:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-021",
+        "amount": "560.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-03T08:20:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-022",
+        "amount": "645.75",
+        "currency": "BRL",
+        "occurred_at": "2026-10-03T09:27:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-023",
+        "amount": "720.40",
+        "currency": "BRL",
+        "occurred_at": "2026-10-03T10:34:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-024",
+        "amount": "850.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-03T11:41:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-025",
+        "amount": "975.90",
+        "currency": "BRL",
+        "occurred_at": "2026-10-03T12:48:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-026",
+        "amount": "1120.50",
+        "currency": "BRL",
+        "occurred_at": "2026-10-03T13:55:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-027",
+        "amount": "1250.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-03T14:02:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-028",
+        "amount": "1389.45",
+        "currency": "BRL",
+        "occurred_at": "2026-10-03T15:09:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-029",
+        "amount": "1499.99",
+        "currency": "BRL",
+        "occurred_at": "2026-10-03T16:16:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-030",
+        "amount": "1680.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-03T17:23:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-031",
+        "amount": "1850.75",
+        "currency": "BRL",
+        "occurred_at": "2026-10-04T08:30:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-032",
+        "amount": "2100.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-04T09:37:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-033",
+        "amount": "2350.40",
+        "currency": "BRL",
+        "occurred_at": "2026-10-04T10:44:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-034",
+        "amount": "2675.90",
+        "currency": "BRL",
+        "occurred_at": "2026-10-04T11:51:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-035",
+        "amount": "2990.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-04T12:58:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-036",
+        "amount": "3250.50",
+        "currency": "BRL",
+        "occurred_at": "2026-10-04T13:05:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-037",
+        "amount": "3680.25",
+        "currency": "BRL",
+        "occurred_at": "2026-10-04T14:12:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-038",
+        "amount": "4120.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-04T15:19:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-039",
+        "amount": "4599.90",
+        "currency": "BRL",
+        "occurred_at": "2026-10-04T16:26:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-040",
+        "amount": "5100.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-04T17:33:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-041",
+        "amount": "5750.80",
+        "currency": "BRL",
+        "occurred_at": "2026-10-05T08:40:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-042",
+        "amount": "6300.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-05T09:47:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-043",
+        "amount": "6850.45",
+        "currency": "BRL",
+        "occurred_at": "2026-10-05T10:54:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-044",
+        "amount": "7490.90",
+        "currency": "BRL",
+        "occurred_at": "2026-10-05T11:01:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-045",
+        "amount": "8250.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-05T12:08:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-046",
+        "amount": "9100.25",
+        "currency": "BRL",
+        "occurred_at": "2026-10-05T13:15:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-047",
+        "amount": "10250.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-05T14:22:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-048",
+        "amount": "11800.60",
+        "currency": "BRL",
+        "occurred_at": "2026-10-05T15:29:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-049",
+        "amount": "13500.00",
+        "currency": "BRL",
+        "occurred_at": "2026-10-05T16:36:00-03:00"
+    },
+    {
+        "external_id": "TX-DEMO-050",
+        "amount": "15750.90",
+        "currency": "BRL",
+        "occurred_at": "2026-10-05T17:43:00-03:00"
+    }
+]
