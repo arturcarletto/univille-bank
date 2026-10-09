@@ -44,12 +44,10 @@ O backend separa **domínio**, **casos de uso** e **infraestrutura**, com respon
 - Terminal **Bash** (Linux, macOS ou WSL2 no Windows). No WSL2, habilite a integração com o Docker Desktop.
 - Portas **8000** (API) e **5173** (frontend) disponíveis.
 
-> Os comandos consideram um **clone novo**. Substitua `SEU-USUARIO` pelo proprietário do repositório após a publicação.
-
 ### 1. Clonar o projeto
 
 ```bash
-git clone https://github.com/SEU-USUARIO/univille-bank.git
+git clone https://github.com/arturcarletto/univille-bank.git
 cd univille-bank
 ```
 
