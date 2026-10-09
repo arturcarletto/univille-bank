@@ -66,8 +66,36 @@ class AuthenticationTest extends TestCase
             'password' => 'wrong-password',
         ])->assertUnauthorized();
 
-        $this->getJson('/api/transactions')->assertUnauthorized();
-        $this->getJson('/api/dashboard/summary')->assertUnauthorized();
+        foreach (['/api/transactions', '/api/dashboard/summary'] as $uri) {
+            $this->getJson($uri)
+                ->assertUnauthorized()
+                ->assertHeader('Content-Type', 'application/json')
+                ->assertExactJson(['message' => 'Unauthenticated.']);
+        }
+    }
+
+    public function test_protected_api_routes_return_json_401_without_accept_header(): void
+    {
+        config(['app.debug' => false]);
+
+        foreach (['/api/transactions', '/api/dashboard/summary'] as $uri) {
+            $this->get($uri)
+                ->assertUnauthorized()
+                ->assertHeader('Content-Type', 'application/json')
+                ->assertExactJson(['message' => 'Unauthenticated.']);
+        }
+    }
+
+    public function test_invalid_bearer_tokens_return_json_401_with_and_without_accept_header(): void
+    {
+        foreach (['/api/transactions', '/api/dashboard/summary'] as $uri) {
+            foreach ([[], ['Accept' => 'application/json']] as $headers) {
+                $this->get($uri, ['Authorization' => 'Bearer invalid-token'] + $headers)
+                    ->assertUnauthorized()
+                    ->assertHeader('Content-Type', 'application/json')
+                    ->assertExactJson(['message' => 'Unauthenticated.']);
+            }
+        }
     }
 
     public function test_registration_validates_required_fields_and_unique_email(): void

@@ -56,7 +56,8 @@ class FetchExternalTransactionsJob implements ShouldQueue
                 );
 
                 if ($transaction->wasRecentlyCreated) {
-                    ProcessTransactionJob::dispatch($transaction->getKey())->afterCommit();
+                    // A fila database usa a mesma conexão: registro e Job são confirmados juntos.
+                    ProcessTransactionJob::dispatch($transaction->getKey())->beforeCommit();
                 }
             });
         }

@@ -88,3 +88,7 @@ Desktop.ini
 # Legacy Laravel development environments
 Homestead.json
 Homestead.yaml
+
+# Local frontend browser validation artifacts
+output/playwright/
+.playwright-cli/

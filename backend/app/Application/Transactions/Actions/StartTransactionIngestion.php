@@ -5,6 +5,7 @@ namespace App\Application\Transactions\Actions;
 use App\Domain\Transactions\IngestionRunStatus;
 use App\Jobs\FetchExternalTransactionsJob;
 use App\Models\IngestionRun;
+use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 
 final class StartTransactionIngestion
@@ -17,14 +18,16 @@ final class StartTransactionIngestion
             throw new InvalidArgumentException('A valid fixture path is required.');
         }
 
-        $run = IngestionRun::create([
-            'source' => 'local-json',
-            'source_path' => $path,
-            'status' => IngestionRunStatus::Pending,
-        ]);
+        return DB::transaction(function () use ($path): IngestionRun {
+            $run = IngestionRun::create([
+                'source' => 'local-json',
+                'source_path' => $path,
+                'status' => IngestionRunStatus::Pending,
+            ]);
 
-        FetchExternalTransactionsJob::dispatch($run->getKey(), $path);
+            FetchExternalTransactionsJob::dispatch($run->getKey(), $path)->beforeCommit();
 
-        return $run;
+            return $run;
+        });
     }
 }
